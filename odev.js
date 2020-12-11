@@ -94,7 +94,7 @@ isValidName("J hon");
 */
 function katilimSaati(dersSayisi, dersSuresi){
     //isFinite -> NaN or Infinity Control
-   if (isFinite(dersSayisi.toString()) && isFinite(dersSuresi.toString())) {
+   if (isFinite(parseInt(dersSayisi)) && isFinite(dersSuresi.toString())) {
       return dersSayisi * dersSuresi;
    }
    else {
@@ -103,6 +103,6 @@ function katilimSaati(dersSayisi, dersSuresi){
    }
 }
 
-katilimSaati(6, "30");
+katilimSaati("", "");
 
 
