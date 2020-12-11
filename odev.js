@@ -5,14 +5,12 @@
 
 var person = {
   name: "John",
-  message: function () {    
-    console.log("Hello, " + this.name)
+  message: function() {
+    console.log("Hello, " + this.name);
   }
 }
-
-var messageFunc = person.message
+var messageFunc = person.message.bind(person);
 messageFunc();
-
 
 /*  
   Odev 2:
@@ -25,7 +23,7 @@ messageFunc();
 var numbers = {
   numbers: [[10,20,30], 2],
   multiply: function(){
-    this.numbers[0].map(function(number, numberIndex){
+    this.numbers[0].map((number) => {
         const result = number * this.numbers[1];
         console.log(result)
     })
@@ -43,8 +41,44 @@ numbers.multiply();
   Ornek : isValidName(" J ohn") false donmeli
 */
 function isValidName(name){
-
+  try {
+    if (typeof name === 'string') {
+      const nameArr = name.toString().trim().split(' ');
+      nameArr.some((item) => {
+        // Character Length
+        if (item.length<2) {
+          console.error("Invalid Name", item);
+          throw false;
+        } else {
+          for (let i = 0; i < item.length; i++) {
+            const asciiCode = item.charCodeAt(i);
+            //Character Control (ascii)
+            const characterUpper = asciiCode > 64 && asciiCode < 91 ; // A - Z 
+            const characterLower = asciiCode > 96 && asciiCode < 123; // a - z
+            if (!(characterLower || characterUpper)) {
+              console.error("Invlaid Name", item)
+              throw false;
+            }
+          }
+        }
+      })
+      //Valid
+      console.log('Valid Name')
+      return true;
+      
+    }
+    else {
+      // One Character
+      console.error("Invalid Name", name);
+      return false;
+    }
+  }
+  catch (e) {
+    if (e !== false) throw e;
+    return e;
+  }
 }
+isValidName("J hon");
 
 /*
   Odev 4:
@@ -59,7 +93,16 @@ function isValidName(name){
   Ornek: katilimSaati("5", "30") 150 sonucunu vermelidir.
 */
 function katilimSaati(dersSayisi, dersSuresi){
-
+    //isFinite -> NaN or Infinity Control
+   if (isFinite(dersSayisi.toString()) && isFinite(dersSuresi.toString())) {
+      return dersSayisi * dersSuresi;
+   }
+   else {
+     console.log("Invalid Input");
+     return false;
+   }
 }
+
+katilimSaati(6, "30");
 
 
