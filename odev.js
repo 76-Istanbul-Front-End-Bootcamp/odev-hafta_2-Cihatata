@@ -78,8 +78,14 @@ function isValidName(name){
     return e;
   }
 }
-isValidName("J hon");
-
+console.log(isValidName("Frank") === true);
+console.log(isValidName(false) === false);
+console.log(isValidName(null) === false);
+console.log(isValidName(undefined) === false);
+console.log(isValidName("") === false);
+console.log(isValidName("  \t\n") === false);
+console.log(isValidName("X") === false);
+console.log("-----------------------------");
 /*
   Odev 4:
   Asagidaki katilimSaati fonksionu 2 arguman almaktadir.
@@ -94,15 +100,34 @@ isValidName("J hon");
 */
 function katilimSaati(dersSayisi, dersSuresi){
     //isFinite -> NaN or Infinity Control
-   if (isFinite(parseInt(dersSayisi)) && isFinite(dersSuresi.toString())) {
+   if (isFinite(parseInt(dersSayisi)) && isFinite(parseInt(dersSuresi))) {
       return dersSayisi * dersSuresi;
    }
    else {
-     console.log("Invalid Input");
      return false;
    }
 }
 
-katilimSaati("", "");
-
+katilimSaati(true, true);
+console.log(!!katilimSaati(6, 10) == true);
+console.log(!!katilimSaati(6, "10") == true);
+console.log(!!katilimSaati("6", 10) == true);
+console.log(!!katilimSaati("6", "10") == true);
+console.log(katilimSaati("", 6) === false);
+console.log(katilimSaati(6, "") === false);
+console.log(katilimSaati("", "") === false);
+console.log(katilimSaati("foo", 6) === false);
+console.log(katilimSaati(6, "foo") === false);
+console.log(katilimSaati("foo", "bar") === false);
+console.log(katilimSaati(null, null) === false);
+console.log(katilimSaati(null, undefined) === false);
+console.log(katilimSaati(undefined, null) === false);
+console.log(katilimSaati(undefined, undefined) === false);
+console.log(katilimSaati(Infinity, Infinity) === false);
+console.log(katilimSaati(undefined, Infinity) === false);
+console.log(katilimSaati(Infinity, undefined) === false);
+console.log(katilimSaati(false, false) === false);
+console.log(katilimSaati(false, true) === false);
+console.log(katilimSaati(true, false) === false);
+console.log(katilimSaati(true, true) === false);
 
